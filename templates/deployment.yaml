@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx1
+  name: my-jenkins
   labels:
     managed-by: dso
 spec:
   replicas: 3
   selector:
     matchLabels:
-      application: nginx1
+      application: my-jenkins
   template:
     metadata:
-      annotations:
       labels:
+        application: my-jenkins
     spec:
-      serviceAccountName: nginx-sa
+      serviceAccountName: my-jenkins-sa
       containers:
-        - name: nginx
-          image: us-central1-docker.pkg.dev/terraform-project-418516/app-registry/nginx1:v1
+        - name: my-jenkins
+          image: jenkins/jenkins
           ports:
             - name: http
               containerPort: 80
